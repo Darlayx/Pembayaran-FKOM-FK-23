@@ -1,15 +1,25 @@
 :root {
-    --primary-color: #005A9C; /* Warna biru tua khas institusi */
-    --secondary-color: #007BFF; /* Biru lebih cerah untuk aksen */
-    --light-gray: #f8f9fa;
-    --dark-gray: #343a40;
-    --success-color: #28a745;
-    --drive-color: #4285F4; /* Google Drive Blue */
-    --sheet-color: #0F9D58; /* Google Sheets Green */
-    --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    --border-radius: 8px;
+    --primary-color: #0D47A1; /* Biru tua yang lebih modern dan profesional */
+    --secondary-color: #1976D2; /* Biru yang lebih cerah untuk aksen */
+    --accent-color: #FFC107; /* Kuning untuk highlight atau CTA penting */
+    --light-gray: #F5F7FA; /* Latar belakang yang sangat terang */
+    --medium-gray: #E0E0E0; /* Untuk border atau pemisah halus */
+    --dark-gray: #424242; /* Teks utama */
+    --text-light: #757575; /* Teks sekunder atau deskripsi */
+    --white-color: #FFFFFF;
+    --success-color: #4CAF50;
+    --error-color: #F44336;
+    --drive-color: #1A73E8; /* Warna Google Drive yang lebih baru */
+    --sheet-color: #0F9D58; /* Warna Google Sheets */
+    --whatsapp-color: #25D366; /* Warna WhatsApp */
+    
+    --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    --card-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    --border-radius: 12px; /* Radius sudut yang lebih modern */
+    --transition-speed: 0.3s;
 }
 
+/* Basic Reset & Font */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -18,192 +28,367 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
+    line-height: 1.7;
     background-color: var(--light-gray);
     color: var(--dark-gray);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-size: 16px;
 }
 
 .container {
     width: 90%;
-    max-width: 1100px;
-    margin: 20px auto;
-    padding: 0 20px;
-    flex-grow: 1;
+    max-width: 1200px; /* Sedikit lebih lebar untuk tampilan modern */
+    margin: 0 auto; /* Dihapus margin atas bawah, diatur per elemen */
+    padding: 0 15px;
 }
 
+/* Icons (Placeholder - ganti dengan SVG atau font icon library) */
+/* Untuk contoh ini, kita akan menggunakan pseudo-elements sederhana. */
+/* Idealnya gunakan SVG inline atau library seperti FontAwesome/Bootstrap Icons */
+[class^="icon-"] {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+.icon-info::before { content: "ℹ️"; }
+.icon-copy::before { content: "📋"; }
+.icon-support::before { content: "📞"; }
+.icon-folder::before { content: "📁"; }
+.icon-drive::before { content: "🇬"; /* Placeholder for Google Drive icon */ }
+.icon-sheet::before { content: "🇸"; /* Placeholder for Sheet icon */ }
+.icon-whatsapp::before { content: "💬"; }
+
+
+/* Header */
 header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1.5rem 0;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--white-color);
+    padding: 2.5rem 0; /* Padding lebih besar */
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
 }
 
 header h1 {
     font-weight: 700;
-    font-size: 2.2rem;
+    font-size: 2.5rem; /* Ukuran font lebih besar */
+    margin-bottom: 0.5rem;
+}
+header .subtitle {
+    font-weight: 400;
+    font-size: 1.1rem;
+    opacity: 0.9;
 }
 
+/* Cards */
 .card {
-    background-color: white;
-    padding: 25px;
-    margin-bottom: 25px;
+    background-color: var(--white-color);
+    padding: 30px; /* Padding lebih besar dalam card */
+    margin-bottom: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
+    transition: box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+.card:hover {
+    /* box-shadow: var(--card-hover-shadow); */
+    /* transform: translateY(-3px); */ /* Efek hover halus, bisa diaktifkan jika suka */
 }
 
-.info-section h2, .semester-access h2 {
+/* Section Titles */
+section h2 {
     color: var(--primary-color);
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--secondary-color);
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--secondary-color); /* Border lebih tebal */
     font-weight: 600;
+    font-size: 1.8rem; /* Ukuran font judul seksi */
+    display: flex;
+    align-items: center;
+}
+section h2 .icon {
+    margin-right: 12px;
+    font-size: 1.5rem; /* Ukuran ikon pada judul */
 }
 
+
+/* Info Block */
 .info-block {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--medium-gray);
+}
+.info-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .info-block h3 {
     color: var(--dark-gray);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     font-weight: 600;
+    font-size: 1.25rem;
 }
 
 .info-block p {
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: var(--text-light);
+}
+.info-block p strong {
+    color: var(--dark-gray);
+    font-weight: 500;
 }
 
 .info-block code {
-    background-color: #e9ecef;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--light-gray);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    color: var(--primary-color);
+    border: 1px solid var(--medium-gray);
 }
 
+.note {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    background-color: #E3F2FD; /* Biru muda untuk note */
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--secondary-color);
+}
+
+/* Copy Button */
 .copy-btn {
     background-color: var(--secondary-color);
-    color: white;
+    color: var(--white-color);
     border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
+    padding: 8px 15px; /* Padding lebih nyaman */
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.8rem;
-    margin-left: 8px;
-    transition: background-color 0.3s ease, transform 0.1s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-left: 10px;
+    transition: background-color var(--transition-speed) ease, transform 0.1s ease;
+    display: inline-flex;
+    align-items: center;
 }
-
 .copy-btn:hover {
-    background-color: #0056b3; /* Darken secondary color */
+    background-color: var(--primary-color);
 }
 .copy-btn:active {
-    transform: scale(0.95);
+    transform: scale(0.96);
+}
+.copy-btn .icon-copy {
+    margin-right: 5px;
 }
 
+
+/* Support Section */
+.support-section p {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+/* Buttons (General & Specific) */
+.btn {
+    display: inline-flex; /* Untuk alignment ikon dan teks */
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px; /* Padding lebih besar untuk tombol utama */
+    text-decoration: none;
+    color: var(--white-color);
+    border-radius: 8px; /* Radius sudut tombol */
+    font-weight: 500; /* Font weight standar untuk tombol */
+    text-align: center;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: none; /* Hapus border default jika ada */
+    cursor: pointer;
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.btn:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.btn [class^="icon-"] {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.btn-drive {
+    background-color: var(--drive-color);
+}
+.btn-drive:hover {
+    background-color: #125ABC; /* Warna hover lebih gelap */
+}
+
+.btn-sheet {
+    background-color: var(--sheet-color);
+}
+.btn-sheet:hover {
+    background-color: #0A7D43; /* Warna hover lebih gelap */
+}
+
+.btn-whatsapp {
+    background-color: var(--whatsapp-color);
+    width: 100%; /* Tombol WhatsApp bisa full width di mobile, atau sesuaikan */
+    max-width: 350px; /* Batasi lebar maksimal */
+    margin-top: 10px;
+}
+.btn-whatsapp:hover {
+    background-color: #1EBE57; /* Warna hover lebih gelap */
+}
+
+
+/* Semester Access */
 .semester-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ukuran minimum card lebih besar */
+    gap: 25px;
 }
 
 .semester-card {
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Tambahkan transisi untuk hover */
+}
+.semester-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
 }
 
 .semester-card h3 {
     color: var(--primary-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--medium-gray);
+    padding-bottom: 10px;
+}
+.semester-status {
+    font-size: 0.9rem;
+    color: var(--text-light);
     margin-bottom: 15px;
+}
+.status-active {
+    color: var(--success-color);
+    font-weight: 600;
+}
+.status-inactive {
+    color: var(--error-color);
     font-weight: 600;
 }
 
 .links {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: auto; /* Pushes links to bottom if card height varies */
-}
-
-.btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 15px;
-    text-decoration: none;
-    color: white;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    text-align: center;
-    transition: opacity 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-}
-.btn:hover {
-    opacity: 0.85;
-    transform: translateY(-2px);
-}
-.btn:active {
-    transform: translateY(0);
-}
-
-.btn svg {
-    margin-right: 8px;
-}
-
-.btn-drive {
-    background-color: var(--drive-color);
-}
-
-.btn-sheet {
-    background-color: var(--sheet-color);
+    gap: 12px;
+    margin-top: auto; 
 }
 
 
+/* Footer */
 footer {
     background-color: var(--dark-gray);
     color: var(--light-gray);
     text-align: center;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     margin-top: auto; /* Pushes footer to bottom */
 }
-
 footer p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    opacity: 0.8;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Responsive Adjustments */
+@media (max-width: 992px) {
     header h1 {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
+    }
+    section h2 {
+        font-size: 1.6rem;
+    }
+    .semester-card h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 15px;
     }
     .container {
         width: 95%;
-        padding: 0 10px;
+    }
+    header {
+        padding: 2rem 0;
+        margin-bottom: 20px;
+    }
+    header h1 {
+        font-size: 1.9rem;
+    }
+    header .subtitle {
+        font-size: 1rem;
+    }
+    .card {
+        padding: 25px;
+        margin-bottom: 25px;
+    }
+    section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+    .info-block p, .support-section p {
+        font-size: 0.95rem;
     }
     .semester-grid {
-        grid-template-columns: 1fr; /* Stack cards on smaller screens */
+        grid-template-columns: 1fr; /* Stack cards */
     }
     .btn {
-        padding: 10px 12px;
-        font-size: 0.9rem;
+        padding: 12px 20px; /* Sedikit kurangi padding tombol */
+        font-size: 0.95rem;
+    }
+    .copy-btn {
+        padding: 7px 12px;
+        font-size: 0.85rem;
+    }
+    .btn-whatsapp {
+        max-width: none; /* Biarkan full width di mobile */
     }
 }
 
 @media (max-width: 480px) {
     header h1 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
+    }
+    header .subtitle {
+        font-size: 0.9rem;
     }
     .card {
         padding: 20px;
     }
-    .info-block p {
+    section h2 {
+        font-size: 1.3rem;
+    }
+    .info-block h3 {
+        font-size: 1.1rem;
+    }
+    .semester-card h3 {
+        font-size: 1.2rem;
+    }
+    .btn {
         font-size: 0.9rem;
     }
     .copy-btn {
-        padding: 4px 8px;
-        font-size: 0.75rem;
+        padding: 6px 10px;
+        font-size: 0.8rem;
     }
 }
