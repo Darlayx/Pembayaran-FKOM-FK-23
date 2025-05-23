@@ -1,0 +1,209 @@
+:root {
+    --primary-color: #005A9C; /* Warna biru tua khas institusi */
+    --secondary-color: #007BFF; /* Biru lebih cerah untuk aksen */
+    --light-gray: #f8f9fa;
+    --dark-gray: #343a40;
+    --success-color: #28a745;
+    --drive-color: #4285F4; /* Google Drive Blue */
+    --sheet-color: #0F9D58; /* Google Sheets Green */
+    --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    --border-radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 20px;
+    flex-grow: 1;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-weight: 700;
+    font-size: 2.2rem;
+}
+
+.card {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+}
+
+.info-section h2, .semester-access h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-color);
+    font-weight: 600;
+}
+
+.info-block {
+    margin-bottom: 20px;
+}
+
+.info-block h3 {
+    color: var(--dark-gray);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.info-block p {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.info-block code {
+    background-color: #e9ecef;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.copy-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-left: 8px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.copy-btn:hover {
+    background-color: #0056b3; /* Darken secondary color */
+}
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+.semester-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.semester-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.semester-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto; /* Pushes links to bottom if card height varies */
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: white;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    text-align: center;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+.btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn svg {
+    margin-right: 8px;
+}
+
+.btn-drive {
+    background-color: var(--drive-color);
+}
+
+.btn-sheet {
+    background-color: var(--sheet-color);
+}
+
+
+footer {
+    background-color: var(--dark-gray);
+    color: var(--light-gray);
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto; /* Pushes footer to bottom */
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    .container {
+        width: 95%;
+        padding: 0 10px;
+    }
+    .semester-grid {
+        grid-template-columns: 1fr; /* Stack cards on smaller screens */
+    }
+    .btn {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+    .card {
+        padding: 20px;
+    }
+    .info-block p {
+        font-size: 0.9rem;
+    }
+    .copy-btn {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+}
