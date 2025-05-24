@@ -1,328 +1,75 @@
-:root {
-    --primary-accent-color: #0A84FF; /* Warna aksen biru yang lebih modern dan cerah */
-    --background-color: #FFFFFF;    /* Latar belakang putih bersih */
-    --secondary-background-color: #F2F2F7; /* Abu-abu sangat muda untuk elemen sekunder seperti input/tombol netral */
-    --card-background-color: #FFFFFF;
-    --text-primary-color: #000000;      /* Hitam untuk teks utama */
-    --text-secondary-color: #3C3C43;  /* Abu-abu gelap untuk teks sekunder (opacity 60% dari hitam) */
-    --text-tertiary-color: #3C3C43;   /* Abu-abu lebih terang untuk teks tersier (opacity 30% dari hitam) */
-    --text-placeholder-color: #3C3C43; /* Warna placeholder (opacity 30% dari hitam) */
-    --separator-color: #C6C6C8;       /* Warna pemisah (opacity 29% dari SystemGray) */
-    --border-light-color: #EAEAEA; /* Border yang sangat halus untuk card atau pemisah */
-    --success-color: #30D158;         /* Hijau iOS */
+function copyToClipboard(elementId, buttonElement) {
+    const textToCopy = document.getElementById(elementId).innerText;
     
-    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0,0,0,0.08); /* Shadow sangat subtle */
-    --border-radius-main: 12px; 
-    --border-radius-button: 8px;
-    --transition-speed: 0.2s;
+    const copyIcon = buttonElement.querySelector('#copyIcon');
+    const copiedIcon = buttonElement.querySelector('#copiedIcon');
+    const textSpan = buttonElement.querySelector('.copy-text');
+    const originalButtonText = textSpan.innerText;
 
-    /* Font sizes */
-    --font-size-base: 15px;
-    --font-size-sm: 13px;
-    --font-size-xs: 12px;
-    --font-size-header: 20px; /* 1.33rem */
-    --font-size-section-title: 18px; /* 1.2rem */
-    --font-size-card-title: 17px; /* 1.13rem */
-    --font-size-info-subtitle: 16px; /* 1.06rem */
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        if (copyIcon) copyIcon.style.display = 'none';
+        if (copiedIcon) copiedIcon.style.display = 'inline-block';
+        textSpan.innerText = 'Disalin!';
+        buttonElement.classList.add('copied'); // Tambahkan class 'copied'
+        buttonElement.disabled = true;
+        
+        setTimeout(() => {
+            if (copyIcon) copyIcon.style.display = 'inline-block';
+            if (copiedIcon) copiedIcon.style.display = 'none';
+            textSpan.innerText = originalButtonText;
+            buttonElement.classList.remove('copied'); // Hapus class 'copied'
+            buttonElement.disabled = false;
+        }, 2000);
+    }).catch(err => {
+        console.error('Gagal menyalin teks: ', err);
+        // Fallback
+        try {
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            textArea.style.position = "fixed"; 
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
 
-}
+            if (copyIcon) copyIcon.style.display = 'none';
+            if (copiedIcon) copiedIcon.style.display = 'inline-block';
+            textSpan.innerText = 'Disalin!';
+            buttonElement.classList.add('copied');
+            buttonElement.disabled = true;
+            
+            setTimeout(() => {
+                if (copyIcon) copyIcon.style.display = 'inline-block';
+                if (copiedIcon) copiedIcon.style.display = 'none';
+                textSpan.innerText = originalButtonText;
+                buttonElement.classList.remove('copied');
+                buttonElement.disabled = false;
+            }, 2000);
 
-/* Basic Reset & Font */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.55; /* Sedikit kurangi line height untuk kesan compact */
-    background-color: var(--background-color);
-    color: var(--text-secondary-color); /* Default text color lebih soft */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    font-size: var(--font-size-base);
-}
-
-.container {
-    width: 90%;
-    max-width: 900px; /* Max width lebih kecil untuk fokus */
-    margin: 0 auto; 
-    padding: 0 15px;
-}
-
-/* SVG Icons Styling */
-.section-icon, .btn-icon {
-    vertical-align: middle; 
-    display: inline-block; /* Important for consistent alignment */
-}
-.section-icon {
-    margin-right: 8px; 
-    width: var(--font-size-section-title); 
-    height: var(--font-size-section-title);
-    fill: var(--primary-accent-color); 
-    opacity: 0.8;
-}
-.btn-icon {
-    margin-right: 6px; 
-    width: 1em; /* Relative to button font size */
-    height: 1em;
+        } catch (e) {
+            alert('Gagal menyalin teks. Browser Anda mungkin tidak mendukung fitur ini. Coba salin manual.');
+        }
+    });
 }
 
-/* Header */
-header {
-    background-color: var(--background-color);
-    color: var(--text-primary-color);
-    padding: 20px 0; /* Padding lebih sedikit */
-    text-align: center;
-    border-bottom: 1px solid var(--border-light-color);
-    margin-bottom: 25px; /* Margin bawah header */
-}
-header h1 {
-    font-weight: 600; 
-    font-size: var(--font-size-header);
-    line-height: 1.3;
-    margin-bottom: 2px; 
-}
-header .subtitle {
-    font-weight: 400;
-    font-size: var(--font-size-sm);
-    color: var(--text-tertiary-color);
-    opacity: 0.8;
-}
+document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-/* Cards & Content Sections */
-.card {
-    background-color: var(--card-background-color);
-    padding: 20px; /* Padding dalam card */
-    margin-bottom: 20px;
-    border-radius: var(--border-radius-main);
-    /* border: 1px solid var(--border-light-color); */ /* Hapus border jika shadow cukup */
-    box-shadow: var(--card-shadow);
-}
-.content-section { 
-    margin-bottom: 25px;
-}
-
-/* Section Titles */
-.section-title {
-    color: var(--text-primary-color);
-    margin-bottom: 16px; 
-    font-weight: 600; 
-    font-size: var(--font-size-section-title);
-    display: flex;
-    align-items: center;
-    line-height: 1.3; 
-}
-
-/* Info Block */
-.info-block {
-    margin-bottom: 16px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border-light-color);
-}
-.info-block:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-.info-block h3 {
-    color: var(--text-primary-color);
-    margin-bottom: 6px;
-    font-weight: 500; 
-    font-size: var(--font-size-info-subtitle); 
-}
-.info-block p {
-    margin-bottom: 6px;
-    font-size: var(--font-size-sm); 
-    color: var(--text-secondary-color);
-}
-.info-block p strong {
-    color: var(--text-primary-color);
-    font-weight: 500;
-}
-.info-block code {
-    background-color: var(--secondary-background-color);
-    padding: 2px 5px;
-    border-radius: 4px;
-    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-    color: var(--text-secondary-color);
-    border: 1px solid var(--border-light-color);
-    font-size: calc(var(--font-size-sm) - 1px);
-}
-
-.note {
-    font-size: var(--font-size-xs);
-    color: var(--text-tertiary-color);
-    opacity: 0.8;
-    background-color: transparent;
-    padding: 8px 0;
-    margin-top: 12px;
-    border-top: 1px dashed var(--border-light-color);
-}
-
-/* Copy Button */
-.copy-btn {
-    background-color: var(--secondary-background-color);
-    color: var(--text-secondary-color);
-    border: 1px solid var(--border-light-color); /* Border yang lebih soft */
-    padding: 4px 8px; 
-    border-radius: var(--border-radius-button);
-    cursor: pointer;
-    font-size: var(--font-size-xs); 
-    font-weight: 500;
-    margin-left: 6px;
-    transition: background-color var(--transition-speed) ease, transform 0.1s ease, border-color var(--transition-speed) ease;
-    display: inline-flex;
-    align-items: center;
-    line-height: 1.4; /* ensure text within button is vertically centered nicely */
-}
-.copy-btn .btn-icon { 
-    fill: currentColor; 
-}
-.copy-btn:hover {
-    background-color: #E9E9EF; 
-    border-color: #DCDCE0;
-}
-.copy-btn:active {
-    transform: scale(0.97);
-}
-.copy-btn.copied {
-    background-color: var(--success-color);
-    color: white;
-    border-color: var(--success-color);
-}
-.copy-btn.copied .btn-icon {
-    fill: white;
-}
-
-
-/* Buttons (General & Specific) */
-.btn {
-    display: inline-flex; 
-    align-items: center;
-    justify-content: center;
-    padding: 8px 16px; 
-    text-decoration: none;
-    border-radius: var(--border-radius-button); 
-    font-weight: 500; 
-    font-size: var(--font-size-sm); 
-    text-align: center;
-    transition: background-color var(--transition-speed) ease, opacity var(--transition-speed) ease, transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
-    border: 1px solid transparent; 
-    cursor: pointer;
-    line-height: 1.4;
-}
-.btn:active {
-    transform: scale(0.98);
-}
-
-.btn-accent { 
-    background-color: var(--primary-accent-color);
-    color: #FFFFFF;
-}
-.btn-accent .btn-icon {
-    fill: #FFFFFF;
-}
-.btn-accent:hover {
-    background-color: #0070E0; /* Darken accent color on hover */
-}
-
-.btn-link { /* For Drive & Sheets, clear visual as links */
-    background-color: var(--secondary-background-color);
-    color: var(--primary-accent-color); /* Text is accent color to signify link */
-    border: 1px solid var(--border-light-color);
-}
-.btn-link .btn-icon {
-    fill: var(--primary-accent-color); /* Icon also accent color */
-}
-.btn-link:hover {
-    background-color: #E9E9EF;
-    border-color: #DCDCE0;
-}
-
-
-/* Semester Access */
-.semester-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
-    gap: 16px; 
-}
-.semester-card { 
-    display: flex;
-    flex-direction: column;
-    transition: box-shadow var(--transition-speed) ease;
-}
-.semester-card:hover {
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.1);
-}
-.semester-card h3 {
-    color: var(--text-primary-color);
-    margin-bottom: 6px;
-    font-weight: 600;
-    font-size: var(--font-size-card-title); 
-}
-.semester-status {
-    font-size: var(--font-size-xs); 
-    color: var(--text-tertiary-color);
-    opacity: 0.8;
-    margin-bottom: 12px;
-}
-.update-date { 
-    color: var(--text-secondary-color); 
-    font-weight: 500;
-}
-.links {
-    display: flex;
-    flex-direction: column;
-    gap: 8px; 
-    margin-top: auto; 
-}
-
-/* Footer */
-footer {
-    background-color: var(--background-color);
-    color: var(--text-tertiary-color);
-    opacity: 0.7;
-    text-align: center;
-    padding: 20px 0;
-    margin-top: auto; 
-    border-top: 1px solid var(--border-light-color);
-}
-footer p {
-    font-size: var(--font-size-xs);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    :root { /* Adjust some base sizes for mobile */
-        --font-size-base: 14px;
-        --font-size-header: 18px;
-        --font-size-section-title: 17px;
-        --font-size-card-title: 16px;
-    }
-    .container {
-        width: 90%; /* Give a bit more space from edges */
-        padding: 0 10px;
-    }
-    header {
-        padding: 15px 0; 
-        margin-bottom: 20px;
-    }
-    .card, .content-section {
-        padding: 15px; 
-        margin-bottom: 15px;
-    }
-    .section-title {
-        margin-bottom: 12px;
-    }
-    .semester-grid {
-        grid-template-columns: 1fr; 
-    }
-    .btn {
-        padding: 7px 14px; 
-    }
-}
+// Hapus event listener animasi tombol mousedown/mouseup jika tidak diperlukan lagi
+// karena CSS :active sudah menangani ini.
+/*
+document.querySelectorAll('.btn, .copy-btn').forEach(button => {
+    button.addEventListener('mousedown', function() {
+        // this.style.transform = 'scale(0.97) translateY(1px)'; 
+    });
+    button.addEventListener('mouseup', function() {
+        // this.style.transform = ''; 
+    });
+    button.addEventListener('mouseleave', function() {
+        // this.style.transform = ''; 
+    });
+});
+*/
