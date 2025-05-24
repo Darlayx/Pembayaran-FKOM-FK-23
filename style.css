@@ -1,21 +1,21 @@
 :root {
-    --primary-color: #0D47A1; /* Biru tua yang lebih modern dan profesional */
-    --secondary-color: #1976D2; /* Biru yang lebih cerah untuk aksen */
-    --accent-color: #FFC107; /* Kuning untuk highlight atau CTA penting */
-    --light-gray: #F5F7FA; /* Latar belakang yang sangat terang */
-    --medium-gray: #E0E0E0; /* Untuk border atau pemisah halus */
-    --dark-gray: #424242; /* Teks utama */
-    --text-light: #757575; /* Teks sekunder atau deskripsi */
+    --primary-color: #0D47A1; 
+    --secondary-color: #1976D2; 
+    --accent-color: #FFC107; 
+    --light-gray: #F5F7FA; 
+    --medium-gray: #E0E0E0; 
+    --dark-gray: #424242; 
+    --text-light: #757575; 
     --white-color: #FFFFFF;
     --success-color: #4CAF50;
     --error-color: #F44336;
-    --drive-color: #1A73E8; /* Warna Google Drive yang lebih baru */
-    --sheet-color: #0F9D58; /* Warna Google Sheets */
-    --whatsapp-color: #25D366; /* Warna WhatsApp */
+    --drive-color: #1A73E8; 
+    --sheet-color: #0F9D58; 
+    --whatsapp-color: #25D366; 
     
     --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     --card-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-    --border-radius: 12px; /* Radius sudut yang lebih modern */
+    --border-radius: 12px; 
     --transition-speed: 0.3s;
 }
 
@@ -39,42 +39,46 @@ body {
 
 .container {
     width: 90%;
-    max-width: 1200px; /* Sedikit lebih lebar untuk tampilan modern */
-    margin: 0 auto; /* Dihapus margin atas bawah, diatur per elemen */
+    max-width: 1200px; 
+    margin: 0 auto; 
     padding: 0 15px;
 }
 
-/* Icons (Placeholder - ganti dengan SVG atau font icon library) */
-/* Untuk contoh ini, kita akan menggunakan pseudo-elements sederhana. */
-/* Idealnya gunakan SVG inline atau library seperti FontAwesome/Bootstrap Icons */
-[class^="icon-"] {
-    display: inline-block;
+/* SVG Icons Styling */
+.section-icon {
+    margin-right: 12px;
+    vertical-align: middle; /* Better alignment with text */
+    width: 26px; /* Slightly larger for section titles */
+    height: 26px;
+    fill: var(--primary-color); /* Default fill for section icons */
+}
+
+.btn-icon {
     margin-right: 8px;
     vertical-align: middle;
 }
-.icon-info::before { content: "ℹ️"; }
-.icon-copy::before { content: "📋"; }
-.icon-support::before { content: "📞"; }
-.icon-folder::before { content: "📁"; }
-.icon-drive::before { content: "🇬"; /* Placeholder for Google Drive icon */ }
-.icon-sheet::before { content: "🇸"; /* Placeholder for Sheet icon */ }
-.icon-whatsapp::before { content: "💬"; }
+/* Specific fills for Drive/Sheet icons are handled inline in HTML (fill="white") */
+/* Or if you want to enforce it via CSS for these specific buttons: */
+.btn-drive .btn-icon,
+.btn-sheet .btn-icon {
+    fill: var(--white-color); /* Ensure they are white */
+}
 
 
 /* Header */
 header {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--white-color);
-    padding: 2.5rem 0; /* Padding lebih besar */
+    padding: 2rem 0; /* Adjusted padding slightly */
     text-align: center;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     margin-bottom: 30px;
 }
 
 header h1 {
-    font-weight: 700;
-    font-size: 2.5rem; /* Ukuran font lebih besar */
-    margin-bottom: 0.5rem;
+    font-weight: 600; /* Matches section h2 weight */
+    font-size: 1.8rem; /* Matches section h2 size */
+    margin-bottom: 0.25rem; /* Adjusted margin */
 }
 header .subtitle {
     font-weight: 400;
@@ -85,15 +89,11 @@ header .subtitle {
 /* Cards */
 .card {
     background-color: var(--white-color);
-    padding: 30px; /* Padding lebih besar dalam card */
+    padding: 30px; 
     margin-bottom: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     transition: box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
-}
-.card:hover {
-    /* box-shadow: var(--card-hover-shadow); */
-    /* transform: translateY(-3px); */ /* Efek hover halus, bisa diaktifkan jika suka */
 }
 
 /* Section Titles */
@@ -101,16 +101,13 @@ section h2 {
     color: var(--primary-color);
     margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: 3px solid var(--secondary-color); /* Border lebih tebal */
+    border-bottom: 3px solid var(--secondary-color); 
     font-weight: 600;
-    font-size: 1.8rem; /* Ukuran font judul seksi */
+    font-size: 1.8rem; 
     display: flex;
     align-items: center;
 }
-section h2 .icon {
-    margin-right: 12px;
-    font-size: 1.5rem; /* Ukuran ikon pada judul */
-}
+/* section h2 .icon was removed, now using .section-icon directly */
 
 
 /* Info Block */
@@ -154,7 +151,7 @@ section h2 .icon {
 .note {
     font-size: 0.9rem;
     color: var(--secondary-color);
-    background-color: #E3F2FD; /* Biru muda untuk note */
+    background-color: #E3F2FD; 
     padding: 10px 15px;
     border-radius: var(--border-radius);
     border-left: 4px solid var(--secondary-color);
@@ -165,7 +162,7 @@ section h2 .icon {
     background-color: var(--secondary-color);
     color: var(--white-color);
     border: none;
-    padding: 8px 15px; /* Padding lebih nyaman */
+    padding: 8px 15px; 
     border-radius: 8px;
     cursor: pointer;
     font-size: 0.9rem;
@@ -175,16 +172,15 @@ section h2 .icon {
     display: inline-flex;
     align-items: center;
 }
+.copy-btn .btn-icon { /* Icon inside copy button */
+    fill: var(--white-color); /* Ensure copy icon is white */
+}
 .copy-btn:hover {
     background-color: var(--primary-color);
 }
 .copy-btn:active {
     transform: scale(0.96);
 }
-.copy-btn .icon-copy {
-    margin-right: 5px;
-}
-
 
 /* Support Section */
 .support-section p {
@@ -195,18 +191,18 @@ section h2 .icon {
 
 /* Buttons (General & Specific) */
 .btn {
-    display: inline-flex; /* Untuk alignment ikon dan teks */
+    display: inline-flex; 
     align-items: center;
     justify-content: center;
-    padding: 12px 25px; /* Padding lebih besar untuk tombol utama */
+    padding: 12px 25px; 
     text-decoration: none;
     color: var(--white-color);
-    border-radius: 8px; /* Radius sudut tombol */
-    font-weight: 500; /* Font weight standar untuk tombol */
+    border-radius: 8px; 
+    font-weight: 500; 
     text-align: center;
     transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border: none; /* Hapus border default jika ada */
+    border: none; 
     cursor: pointer;
 }
 .btn:hover {
@@ -217,47 +213,47 @@ section h2 .icon {
     transform: translateY(0px) scale(0.98);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-.btn [class^="icon-"] {
-    margin-right: 10px;
-    font-size: 1.1em;
-}
+/* .btn [class^="icon-"] was removed */
 
 .btn-drive {
     background-color: var(--drive-color);
 }
 .btn-drive:hover {
-    background-color: #125ABC; /* Warna hover lebih gelap */
+    background-color: #125ABC; 
 }
 
 .btn-sheet {
     background-color: var(--sheet-color);
 }
 .btn-sheet:hover {
-    background-color: #0A7D43; /* Warna hover lebih gelap */
+    background-color: #0A7D43; 
 }
 
 .btn-whatsapp {
     background-color: var(--whatsapp-color);
-    width: 100%; /* Tombol WhatsApp bisa full width di mobile, atau sesuaikan */
-    max-width: 350px; /* Batasi lebar maksimal */
+    width: 100%; 
+    max-width: 350px; 
     margin-top: 10px;
 }
+.btn-whatsapp .btn-icon { /* WhatsApp icon */
+    fill: var(--white-color);
+}
 .btn-whatsapp:hover {
-    background-color: #1EBE57; /* Warna hover lebih gelap */
+    background-color: #1EBE57; 
 }
 
 
 /* Semester Access */
 .semester-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ukuran minimum card lebih besar */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 25px;
 }
 
 .semester-card {
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Tambahkan transisi untuk hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 .semester-card:hover {
     transform: translateY(-5px);
@@ -277,13 +273,9 @@ section h2 .icon {
     color: var(--text-light);
     margin-bottom: 15px;
 }
-.status-active {
-    color: var(--success-color);
-    font-weight: 600;
-}
-.status-inactive {
-    color: var(--error-color);
-    font-weight: 600;
+.update-date { /* For the date part of status */
+    color: var(--dark-gray); /* Or var(--primary-color) for more emphasis */
+    font-weight: 500;
 }
 
 .links {
@@ -300,7 +292,7 @@ footer {
     color: var(--light-gray);
     text-align: center;
     padding: 1.5rem 0;
-    margin-top: auto; /* Pushes footer to bottom */
+    margin-top: auto; 
 }
 footer p {
     font-size: 0.95rem;
@@ -309,12 +301,8 @@ footer p {
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
-    header h1 {
-        font-size: 2.2rem;
-    }
-    section h2 {
-        font-size: 1.6rem;
-    }
+    /* header h1 already adjusted */
+    /* section h2 already 1.8rem */
     .semester-card h3 {
         font-size: 1.3rem;
     }
@@ -328,11 +316,11 @@ footer p {
         width: 95%;
     }
     header {
-        padding: 2rem 0;
+        padding: 1.8rem 0; /* Adjusted padding for smaller header */
         margin-bottom: 20px;
     }
     header h1 {
-        font-size: 1.9rem;
+        font-size: 1.6rem; /* Adjust if 1.8rem is too big with subtitle */
     }
     header .subtitle {
         font-size: 1rem;
@@ -342,7 +330,7 @@ footer p {
         margin-bottom: 25px;
     }
     section h2 {
-        font-size: 1.5rem;
+        font-size: 1.6rem; /* Keep consistent with header h1 or adjust both */
         margin-bottom: 20px;
         padding-bottom: 10px;
     }
@@ -350,10 +338,10 @@ footer p {
         font-size: 0.95rem;
     }
     .semester-grid {
-        grid-template-columns: 1fr; /* Stack cards */
+        grid-template-columns: 1fr; 
     }
     .btn {
-        padding: 12px 20px; /* Sedikit kurangi padding tombol */
+        padding: 12px 20px; 
         font-size: 0.95rem;
     }
     .copy-btn {
@@ -361,13 +349,13 @@ footer p {
         font-size: 0.85rem;
     }
     .btn-whatsapp {
-        max-width: none; /* Biarkan full width di mobile */
+        max-width: none; 
     }
 }
 
 @media (max-width: 480px) {
     header h1 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
     header .subtitle {
         font-size: 0.9rem;
@@ -376,7 +364,7 @@ footer p {
         padding: 20px;
     }
     section h2 {
-        font-size: 1.3rem;
+        font-size: 1.5rem; /* Consistency with header h1 */
     }
     .info-block h3 {
         font-size: 1.1rem;
