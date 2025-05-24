@@ -1,22 +1,30 @@
 :root {
-    --primary-color: #0D47A1; 
-    --secondary-color: #1976D2; 
-    --accent-color: #FFC107; 
-    --light-gray: #F5F7FA; 
-    --medium-gray: #E0E0E0; 
-    --dark-gray: #424242; 
-    --text-light: #757575; 
-    --white-color: #FFFFFF;
-    --success-color: #4CAF50;
-    --error-color: #F44336;
-    --drive-color: #1A73E8; /* Warna Google Drive */
-    --sheet-color: #0F9D58; /* Warna Google Sheets */
-    --whatsapp-color: #25D366; 
+    --primary-accent-color: #0A84FF; /* Warna aksen biru yang lebih modern dan cerah */
+    --background-color: #FFFFFF;    /* Latar belakang putih bersih */
+    --secondary-background-color: #F2F2F7; /* Abu-abu sangat muda untuk elemen sekunder seperti input/tombol netral */
+    --card-background-color: #FFFFFF;
+    --text-primary-color: #000000;      /* Hitam untuk teks utama */
+    --text-secondary-color: #3C3C43;  /* Abu-abu gelap untuk teks sekunder (opacity 60% dari hitam) */
+    --text-tertiary-color: #3C3C43;   /* Abu-abu lebih terang untuk teks tersier (opacity 30% dari hitam) */
+    --text-placeholder-color: #3C3C43; /* Warna placeholder (opacity 30% dari hitam) */
+    --separator-color: #C6C6C8;       /* Warna pemisah (opacity 29% dari SystemGray) */
+    --border-light-color: #EAEAEA; /* Border yang sangat halus untuk card atau pemisah */
+    --success-color: #30D158;         /* Hijau iOS */
     
-    --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    --card-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-    --border-radius: 12px; 
-    --transition-speed: 0.3s;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0,0,0,0.08); /* Shadow sangat subtle */
+    --border-radius-main: 12px; 
+    --border-radius-button: 8px;
+    --transition-speed: 0.2s;
+
+    /* Font sizes */
+    --font-size-base: 15px;
+    --font-size-sm: 13px;
+    --font-size-xs: 12px;
+    --font-size-header: 20px; /* 1.33rem */
+    --font-size-section-title: 18px; /* 1.2rem */
+    --font-size-card-title: 17px; /* 1.13rem */
+    --font-size-info-subtitle: 16px; /* 1.06rem */
+
 }
 
 /* Basic Reset & Font */
@@ -24,364 +32,297 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.7;
-    background-color: var(--light-gray);
-    color: var(--dark-gray);
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55; /* Sedikit kurangi line height untuk kesan compact */
+    background-color: var(--background-color);
+    color: var(--text-secondary-color); /* Default text color lebih soft */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-size: 16px;
+    font-size: var(--font-size-base);
 }
 
 .container {
     width: 90%;
-    max-width: 1200px; 
+    max-width: 900px; /* Max width lebih kecil untuk fokus */
     margin: 0 auto; 
     padding: 0 15px;
 }
 
 /* SVG Icons Styling */
-.section-icon {
-    margin-right: 10px; /* Sedikit kurangi margin */
+.section-icon, .btn-icon {
     vertical-align: middle; 
-    width: 22px; /* Ukuran ikon disesuaikan dengan font judul seksi */
-    height: 22px;
-    fill: var(--primary-color); 
+    display: inline-block; /* Important for consistent alignment */
 }
-
+.section-icon {
+    margin-right: 8px; 
+    width: var(--font-size-section-title); 
+    height: var(--font-size-section-title);
+    fill: var(--primary-accent-color); 
+    opacity: 0.8;
+}
 .btn-icon {
-    margin-right: 8px;
-    vertical-align: middle;
+    margin-right: 6px; 
+    width: 1em; /* Relative to button font size */
+    height: 1em;
 }
-.btn-drive .btn-icon,
-.btn-sheet .btn-icon {
-    fill: var(--white-color); 
-}
-
 
 /* Header */
 header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: var(--white-color);
-    padding: 2rem 0; 
+    background-color: var(--background-color);
+    color: var(--text-primary-color);
+    padding: 20px 0; /* Padding lebih sedikit */
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-light-color);
+    margin-bottom: 25px; /* Margin bawah header */
 }
-
 header h1 {
     font-weight: 600; 
-    font-size: 1.6rem; /* Diperkecil lagi agar konsisten dengan judul seksi yang baru */
-    margin-bottom: 0.25rem; 
+    font-size: var(--font-size-header);
+    line-height: 1.3;
+    margin-bottom: 2px; 
 }
 header .subtitle {
     font-weight: 400;
-    font-size: 1.1rem;
-    opacity: 0.9;
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary-color);
+    opacity: 0.8;
 }
 
-/* Cards */
+/* Cards & Content Sections */
 .card {
-    background-color: var(--white-color);
-    padding: 30px; 
-    margin-bottom: 30px;
-    border-radius: var(--border-radius);
+    background-color: var(--card-background-color);
+    padding: 20px; /* Padding dalam card */
+    margin-bottom: 20px;
+    border-radius: var(--border-radius-main);
+    /* border: 1px solid var(--border-light-color); */ /* Hapus border jika shadow cukup */
     box-shadow: var(--card-shadow);
-    transition: box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+.content-section { 
+    margin-bottom: 25px;
 }
 
 /* Section Titles */
-.section-title { /* Menggunakan class baru untuk judul seksi */
-    color: var(--primary-color);
-    margin-bottom: 20px; /* Sedikit kurangi margin bawah */
-    padding-bottom: 12px; /* Sedikit kurangi padding bawah */
-    border-bottom: 2px solid var(--secondary-color); /* Border lebih tipis */
-    font-weight: 600;
-    font-size: 1.6rem; /* Ukuran font judul seksi diperkecil */
+.section-title {
+    color: var(--text-primary-color);
+    margin-bottom: 16px; 
+    font-weight: 600; 
+    font-size: var(--font-size-section-title);
     display: flex;
     align-items: center;
+    line-height: 1.3; 
 }
 
 /* Info Block */
 .info-block {
-    margin-bottom: 25px;
-    padding-bottom: 25px;
-    border-bottom: 1px solid var(--medium-gray);
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-light-color);
 }
 .info-block:last-child {
     border-bottom: none;
     margin-bottom: 0;
     padding-bottom: 0;
 }
-
 .info-block h3 {
-    color: var(--dark-gray);
-    margin-bottom: 12px;
-    font-weight: 600;
-    font-size: 1.15rem; /* Sedikit perkecil subjudul info block */
+    color: var(--text-primary-color);
+    margin-bottom: 6px;
+    font-weight: 500; 
+    font-size: var(--font-size-info-subtitle); 
 }
-
 .info-block p {
-    margin-bottom: 10px;
-    font-size: 0.95rem; /* Sedikit perkecil teks paragraf info block */
-    color: var(--text-light);
+    margin-bottom: 6px;
+    font-size: var(--font-size-sm); 
+    color: var(--text-secondary-color);
 }
 .info-block p strong {
-    color: var(--dark-gray);
+    color: var(--text-primary-color);
     font-weight: 500;
 }
-
 .info-block code {
-    background-color: var(--light-gray);
-    padding: 4px 8px;
-    border-radius: 6px;
+    background-color: var(--secondary-background-color);
+    padding: 2px 5px;
+    border-radius: 4px;
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-    color: var(--primary-color);
-    border: 1px solid var(--medium-gray);
+    color: var(--text-secondary-color);
+    border: 1px solid var(--border-light-color);
+    font-size: calc(var(--font-size-sm) - 1px);
 }
 
 .note {
-    font-size: 0.9rem;
-    color: var(--secondary-color);
-    background-color: #E3F2FD; 
-    padding: 10px 15px;
-    border-radius: var(--border-radius);
-    border-left: 4px solid var(--secondary-color);
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary-color);
+    opacity: 0.8;
+    background-color: transparent;
+    padding: 8px 0;
+    margin-top: 12px;
+    border-top: 1px dashed var(--border-light-color);
 }
 
 /* Copy Button */
 .copy-btn {
-    background-color: var(--secondary-color);
-    color: var(--white-color);
-    border: none;
-    padding: 7px 12px; /* Sedikit perkecil padding tombol salin */
-    border-radius: 8px;
+    background-color: var(--secondary-background-color);
+    color: var(--text-secondary-color);
+    border: 1px solid var(--border-light-color); /* Border yang lebih soft */
+    padding: 4px 8px; 
+    border-radius: var(--border-radius-button);
     cursor: pointer;
-    font-size: 0.85rem; /* Sedikit perkecil font tombol salin */
+    font-size: var(--font-size-xs); 
     font-weight: 500;
-    margin-left: 10px;
-    transition: background-color var(--transition-speed) ease, transform 0.1s ease;
+    margin-left: 6px;
+    transition: background-color var(--transition-speed) ease, transform 0.1s ease, border-color var(--transition-speed) ease;
     display: inline-flex;
     align-items: center;
+    line-height: 1.4; /* ensure text within button is vertically centered nicely */
 }
 .copy-btn .btn-icon { 
-    fill: var(--white-color); 
+    fill: currentColor; 
 }
 .copy-btn:hover {
-    background-color: var(--primary-color);
+    background-color: #E9E9EF; 
+    border-color: #DCDCE0;
 }
 .copy-btn:active {
-    transform: scale(0.96);
+    transform: scale(0.97);
+}
+.copy-btn.copied {
+    background-color: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
+}
+.copy-btn.copied .btn-icon {
+    fill: white;
 }
 
-/* Support Section */
-.support-section p {
-    font-size: 0.95rem; /* Sedikit perkecil teks paragraf */
-    color: var(--text-light);
-    margin-bottom: 20px;
-}
 
 /* Buttons (General & Specific) */
 .btn {
     display: inline-flex; 
     align-items: center;
     justify-content: center;
-    padding: 10px 20px; /* Sedikit perkecil padding tombol utama */
+    padding: 8px 16px; 
     text-decoration: none;
-    color: var(--white-color);
-    border-radius: 8px; 
+    border-radius: var(--border-radius-button); 
     font-weight: 500; 
-    font-size: 0.9rem; /* Sedikit perkecil font tombol utama */
+    font-size: var(--font-size-sm); 
     text-align: center;
-    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border: none; 
+    transition: background-color var(--transition-speed) ease, opacity var(--transition-speed) ease, transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    border: 1px solid transparent; 
     cursor: pointer;
-}
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    line-height: 1.4;
 }
 .btn:active {
-    transform: translateY(0px) scale(0.98);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transform: scale(0.98);
 }
 
-.btn-drive {
-    background-color: var(--drive-color);
+.btn-accent { 
+    background-color: var(--primary-accent-color);
+    color: #FFFFFF;
 }
-.btn-drive:hover {
-    background-color: #125ABC; 
+.btn-accent .btn-icon {
+    fill: #FFFFFF;
 }
-
-.btn-sheet {
-    background-color: var(--sheet-color);
-}
-.btn-sheet:hover {
-    background-color: #0A7D43; 
+.btn-accent:hover {
+    background-color: #0070E0; /* Darken accent color on hover */
 }
 
-.btn-whatsapp {
-    background-color: var(--whatsapp-color);
-    width: 100%; 
-    max-width: 350px; 
-    margin-top: 10px;
+.btn-link { /* For Drive & Sheets, clear visual as links */
+    background-color: var(--secondary-background-color);
+    color: var(--primary-accent-color); /* Text is accent color to signify link */
+    border: 1px solid var(--border-light-color);
 }
-.btn-whatsapp .btn-icon { 
-    fill: var(--white-color);
+.btn-link .btn-icon {
+    fill: var(--primary-accent-color); /* Icon also accent color */
 }
-.btn-whatsapp:hover {
-    background-color: #1EBE57; 
+.btn-link:hover {
+    background-color: #E9E9EF;
+    border-color: #DCDCE0;
 }
 
 
 /* Semester Access */
 .semester-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Sedikit perkecil minmax card */
-    gap: 20px; /* Sedikit perkecil gap */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+    gap: 16px; 
 }
-
-.semester-card {
+.semester-card { 
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    transition: box-shadow var(--transition-speed) ease;
 }
 .semester-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--card-hover-shadow);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.1);
 }
-
 .semester-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 10px;
+    color: var(--text-primary-color);
+    margin-bottom: 6px;
     font-weight: 600;
-    font-size: 1.3rem; /* Sedikit perkecil judul semester card */
-    border-bottom: 1px solid var(--medium-gray);
-    padding-bottom: 10px;
+    font-size: var(--font-size-card-title); 
 }
 .semester-status {
-    font-size: 0.85rem; /* Sedikit perkecil status text */
-    color: var(--text-light);
-    margin-bottom: 15px;
+    font-size: var(--font-size-xs); 
+    color: var(--text-tertiary-color);
+    opacity: 0.8;
+    margin-bottom: 12px;
 }
 .update-date { 
-    color: var(--dark-gray); 
+    color: var(--text-secondary-color); 
     font-weight: 500;
 }
-
 .links {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Sedikit perkecil gap antar link */
+    gap: 8px; 
     margin-top: auto; 
 }
-
 
 /* Footer */
 footer {
-    background-color: var(--dark-gray);
-    color: var(--light-gray);
+    background-color: var(--background-color);
+    color: var(--text-tertiary-color);
+    opacity: 0.7;
     text-align: center;
-    padding: 1.5rem 0;
+    padding: 20px 0;
     margin-top: auto; 
+    border-top: 1px solid var(--border-light-color);
 }
 footer p {
-    font-size: 0.95rem;
-    opacity: 0.8;
+    font-size: var(--font-size-xs);
 }
 
 /* Responsive Adjustments */
-@media (max-width: 992px) {
-    /* header h1 already 1.6rem */
-    /* .section-title already 1.6rem */
-    .semester-card h3 {
-        font-size: 1.25rem; /* Further adjust for medium screens */
-    }
-}
-
 @media (max-width: 768px) {
-    body {
-        font-size: 15px;
+    :root { /* Adjust some base sizes for mobile */
+        --font-size-base: 14px;
+        --font-size-header: 18px;
+        --font-size-section-title: 17px;
+        --font-size-card-title: 16px;
     }
     .container {
-        width: 95%;
+        width: 90%; /* Give a bit more space from edges */
+        padding: 0 10px;
     }
     header {
-        padding: 1.8rem 0; 
+        padding: 15px 0; 
         margin-bottom: 20px;
     }
-    header h1 {
-        font-size: 1.5rem; /* Adjust header h1 for smaller screens */
-    }
-    header .subtitle {
-        font-size: 1rem;
-    }
-    .card {
-        padding: 20px; /* Kurangi padding card */
-        margin-bottom: 20px;
+    .card, .content-section {
+        padding: 15px; 
+        margin-bottom: 15px;
     }
     .section-title {
-        font-size: 1.5rem; /* Adjust section title for smaller screens */
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-    }
-    .info-block p, .support-section p {
-        font-size: 0.9rem;
+        margin-bottom: 12px;
     }
     .semester-grid {
         grid-template-columns: 1fr; 
     }
     .btn {
-        padding: 10px 18px; 
-        font-size: 0.9rem;
-    }
-    .copy-btn {
-        padding: 6px 10px;
-        font-size: 0.8rem;
-    }
-    .btn-whatsapp {
-        max-width: none; 
-    }
-    .section-icon {
-        width: 20px;
-        height: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.4rem;
-    }
-    header .subtitle {
-        font-size: 0.85rem;
-    }
-    .card {
-        padding: 15px;
-    }
-    .section-title {
-        font-size: 1.4rem; 
-    }
-    .info-block h3 {
-        font-size: 1.05rem;
-    }
-    .semester-card h3 {
-        font-size: 1.1rem;
-    }
-    .btn {
-        font-size: 0.85rem;
-        padding: 8px 15px;
-    }
-    .copy-btn {
-        padding: 5px 8px;
-        font-size: 0.75rem;
-    }
-    .section-icon {
-        width: 18px;
-        height: 18px;
+        padding: 7px 14px; 
     }
 }
