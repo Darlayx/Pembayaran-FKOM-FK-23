@@ -1,19 +1,30 @@
 :root {
-    --primary-accent-color: #007AFF; /* Biru iOS sebagai aksen utama (lebih modern) */
-    --background-color: #F9F9FB; /* Latar belakang sangat terang, hampir putih */
+    --primary-accent-color: #0A84FF; /* Warna aksen biru yang lebih modern dan cerah */
+    --background-color: #FFFFFF;    /* Latar belakang putih bersih */
+    --secondary-background-color: #F2F2F7; /* Abu-abu sangat muda untuk elemen sekunder seperti input/tombol netral */
     --card-background-color: #FFFFFF;
-    --text-primary-color: #1D1D1F; /* Hitam pekat untuk teks utama (ala Apple) */
-    --text-secondary-color: #6E6E73; /* Abu-abu untuk teks sekunder */
-    --text-tertiary-color: #8A8A8E; /* Abu-abu lebih terang */
-    --border-color: #E5E5EA; /* Border yang sangat halus */
-    --button-secondary-bg: #EFEFF4; /* Latar tombol sekunder */
-    --button-secondary-text: #000000; /* Teks tombol sekunder */
-    --success-color: #34C759; /* Hijau iOS */
+    --text-primary-color: #000000;      /* Hitam untuk teks utama */
+    --text-secondary-color: #3C3C43;  /* Abu-abu gelap untuk teks sekunder (opacity 60% dari hitam) */
+    --text-tertiary-color: #3C3C43;   /* Abu-abu lebih terang untuk teks tersier (opacity 30% dari hitam) */
+    --text-placeholder-color: #3C3C43; /* Warna placeholder (opacity 30% dari hitam) */
+    --separator-color: #C6C6C8;       /* Warna pemisah (opacity 29% dari SystemGray) */
+    --border-light-color: #EAEAEA; /* Border yang sangat halus untuk card atau pemisah */
+    --success-color: #30D158;         /* Hijau iOS */
     
-    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Shadow lebih subtle */
-    --border-radius-main: 10px; 
-    --border-radius-small: 6px;
-    --transition-speed: 0.25s;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0,0,0,0.08); /* Shadow sangat subtle */
+    --border-radius-main: 12px; 
+    --border-radius-button: 8px;
+    --transition-speed: 0.2s;
+
+    /* Font sizes */
+    --font-size-base: 15px;
+    --font-size-sm: 13px;
+    --font-size-xs: 12px;
+    --font-size-header: 20px; /* 1.33rem */
+    --font-size-section-title: 18px; /* 1.2rem */
+    --font-size-card-title: 17px; /* 1.13rem */
+    --font-size-info-subtitle: 16px; /* 1.06rem */
+
 }
 
 /* Basic Reset & Font */
@@ -21,261 +32,249 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Tambahkan fallback system fonts */
-    line-height: 1.6;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55; /* Sedikit kurangi line height untuk kesan compact */
     background-color: var(--background-color);
-    color: var(--text-primary-color);
+    color: var(--text-secondary-color); /* Default text color lebih soft */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-size: 15px; /* Sedikit perkecil base font size */
+    font-size: var(--font-size-base);
 }
 
 .container {
     width: 90%;
-    max-width: 960px; /* Max width sedikit dikurangi untuk kesan lebih fokus */
+    max-width: 900px; /* Max width lebih kecil untuk fokus */
     margin: 0 auto; 
     padding: 0 15px;
 }
 
 /* SVG Icons Styling */
+.section-icon, .btn-icon {
+    vertical-align: middle; 
+    display: inline-block; /* Important for consistent alignment */
+}
 .section-icon {
     margin-right: 8px; 
-    vertical-align: middle; 
-    width: 18px; /* Ukuran ikon disesuaikan dengan font judul seksi */
-    height: 18px;
+    width: var(--font-size-section-title); 
+    height: var(--font-size-section-title);
     fill: var(--primary-accent-color); 
+    opacity: 0.8;
 }
-
 .btn-icon {
-    margin-right: 6px; /* Margin ikon di tombol */
-    vertical-align: middle;
-    width: 16px; /* Ukuran ikon di tombol */
-    height: 16px;
+    margin-right: 6px; 
+    width: 1em; /* Relative to button font size */
+    height: 1em;
 }
-.btn-primary .btn-icon{
-    fill: var(--card-background-color); /* Ikon putih untuk tombol primary */
-}
-.btn-secondary .btn-icon{
-    fill: var(--text-primary-color); /* Ikon warna teks untuk tombol secondary */
-}
-
 
 /* Header */
 header {
-    background-color: var(--card-background-color); /* Header dengan warna card */
+    background-color: var(--background-color);
     color: var(--text-primary-color);
-    padding: 1.5rem 0; 
+    padding: 20px 0; /* Padding lebih sedikit */
     text-align: center;
-    border-bottom: 1px solid var(--border-color); /* Border halus di bawah header */
-    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-light-color);
+    margin-bottom: 25px; /* Margin bawah header */
 }
-
 header h1 {
     font-weight: 600; 
-    font-size: 1.4rem; /* Ukuran font judul utama (disamakan dengan section-title) */
-    margin-bottom: 0.15rem; 
+    font-size: var(--font-size-header);
+    line-height: 1.3;
+    margin-bottom: 2px; 
 }
 header .subtitle {
     font-weight: 400;
-    font-size: 0.9rem; /* Perkecil subtitle */
-    color: var(--text-secondary-color);
-    opacity: 1; /* Hapus opacity, kontrol via warna */
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary-color);
+    opacity: 0.8;
 }
 
 /* Cards & Content Sections */
 .card {
     background-color: var(--card-background-color);
-    padding: 25px; /* Padding dalam card */
-    margin-bottom: 25px;
+    padding: 20px; /* Padding dalam card */
+    margin-bottom: 20px;
     border-radius: var(--border-radius-main);
+    /* border: 1px solid var(--border-light-color); */ /* Hapus border jika shadow cukup */
     box-shadow: var(--card-shadow);
 }
-.content-section { /* Untuk seksi yang mungkin tidak pakai card tapi butuh margin */
-    margin-bottom: 30px;
+.content-section { 
+    margin-bottom: 25px;
 }
-
 
 /* Section Titles */
 .section-title {
     color: var(--text-primary-color);
-    margin-bottom: 18px; 
-    padding-bottom: 0; /* Hapus padding bawah, border ditiadakan untuk kesan bersih */
-    border-bottom: none; /* Hapus border bawah */
-    font-weight: 600; /* Font weight lebih tebal dari teks biasa */
-    font-size: 1.25rem; /* Ukuran font judul seksi diperkecil */
+    margin-bottom: 16px; 
+    font-weight: 600; 
+    font-size: var(--font-size-section-title);
     display: flex;
     align-items: center;
-    line-height: 1.3; /* Mengurangi line height agar lebih compact jika 2 baris */
+    line-height: 1.3; 
 }
 
 /* Info Block */
 .info-block {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-light-color);
 }
 .info-block:last-child {
     border-bottom: none;
     margin-bottom: 0;
     padding-bottom: 0;
 }
-
 .info-block h3 {
     color: var(--text-primary-color);
-    margin-bottom: 8px;
-    font-weight: 500; /* Font weight standar untuk subjudul */
-    font-size: 1rem; 
+    margin-bottom: 6px;
+    font-weight: 500; 
+    font-size: var(--font-size-info-subtitle); 
 }
-
 .info-block p {
-    margin-bottom: 8px;
-    font-size: 0.9rem; 
+    margin-bottom: 6px;
+    font-size: var(--font-size-sm); 
     color: var(--text-secondary-color);
 }
 .info-block p strong {
     color: var(--text-primary-color);
     font-weight: 500;
 }
-
 .info-block code {
-    background-color: var(--background-color); /* Latar code lebih netral */
-    padding: 3px 6px;
-    border-radius: var(--border-radius-small);
+    background-color: var(--secondary-background-color);
+    padding: 2px 5px;
+    border-radius: 4px;
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     color: var(--text-secondary-color);
-    border: 1px solid var(--border-color);
-    font-size: 0.85rem;
+    border: 1px solid var(--border-light-color);
+    font-size: calc(var(--font-size-sm) - 1px);
 }
 
 .note {
-    font-size: 0.85rem;
+    font-size: var(--font-size-xs);
     color: var(--text-tertiary-color);
-    background-color: transparent; /* Transparan untuk note */
-    padding: 8px 0; /* Padding vertikal saja */
-    border-radius: 0;
-    border-left: none; /* Hapus border kiri */
-    border-top: 1px dashed var(--border-color); /* Garis putus-putus di atas */
-    margin-top: 15px;
+    opacity: 0.8;
+    background-color: transparent;
+    padding: 8px 0;
+    margin-top: 12px;
+    border-top: 1px dashed var(--border-light-color);
 }
 
 /* Copy Button */
 .copy-btn {
-    background-color: var(--button-secondary-bg);
-    color: var(--button-secondary-text);
-    border: 1px solid var(--border-color);
-    padding: 6px 10px; 
-    border-radius: var(--border-radius-small);
+    background-color: var(--secondary-background-color);
+    color: var(--text-secondary-color);
+    border: 1px solid var(--border-light-color); /* Border yang lebih soft */
+    padding: 4px 8px; 
+    border-radius: var(--border-radius-button);
     cursor: pointer;
-    font-size: 0.8rem; 
+    font-size: var(--font-size-xs); 
     font-weight: 500;
-    margin-left: 8px;
-    transition: background-color var(--transition-speed) ease, transform 0.1s ease;
+    margin-left: 6px;
+    transition: background-color var(--transition-speed) ease, transform 0.1s ease, border-color var(--transition-speed) ease;
     display: inline-flex;
     align-items: center;
+    line-height: 1.4; /* ensure text within button is vertically centered nicely */
 }
 .copy-btn .btn-icon { 
-    fill: var(--button-secondary-text); 
+    fill: currentColor; 
 }
 .copy-btn:hover {
-    background-color: #E5E5EA; /* Sedikit lebih gelap saat hover */
+    background-color: #E9E9EF; 
+    border-color: #DCDCE0;
 }
 .copy-btn:active {
     transform: scale(0.97);
 }
-
-/* Support Section */
-.support-section p {
-    font-size: 0.9rem; 
-    color: var(--text-secondary-color);
-    margin-bottom: 15px;
+.copy-btn.copied {
+    background-color: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
 }
+.copy-btn.copied .btn-icon {
+    fill: white;
+}
+
 
 /* Buttons (General & Specific) */
 .btn {
     display: inline-flex; 
     align-items: center;
     justify-content: center;
-    padding: 9px 18px; 
+    padding: 8px 16px; 
     text-decoration: none;
-    border-radius: var(--border-radius-small); 
+    border-radius: var(--border-radius-button); 
     font-weight: 500; 
-    font-size: 0.85rem; 
+    font-size: var(--font-size-sm); 
     text-align: center;
-    transition: background-color var(--transition-speed) ease, opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
-    border: none; 
+    transition: background-color var(--transition-speed) ease, opacity var(--transition-speed) ease, transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    border: 1px solid transparent; 
     cursor: pointer;
-}
-.btn:hover {
-    opacity: 0.85;
+    line-height: 1.4;
 }
 .btn:active {
     transform: scale(0.98);
-    opacity: 1;
 }
 
-.btn-primary { /* Tombol dengan warna aksen utama */
+.btn-accent { 
     background-color: var(--primary-accent-color);
-    color: var(--card-background-color);
+    color: #FFFFFF;
 }
-.btn-primary:hover {
-    background-color: #0062CC; /* Warna hover lebih gelap untuk primary */
+.btn-accent .btn-icon {
+    fill: #FFFFFF;
 }
-
-.btn-secondary { /* Tombol netral/sekunder */
-    background-color: var(--button-secondary-bg);
-    color: var(--button-secondary-text);
-    border: 1px solid var(--border-color);
-}
-.btn-secondary:hover {
-    background-color: #E0E0E5;
+.btn-accent:hover {
+    background-color: #0070E0; /* Darken accent color on hover */
 }
 
-.btn-whatsapp { /* Menggunakan style .btn-primary */
-    width: auto; /* Tidak full width by default */
-    max-width: none; 
-    margin-top: 10px;
-    display: inline-flex; /* Agar tidak full width jika teks pendek */
+.btn-link { /* For Drive & Sheets, clear visual as links */
+    background-color: var(--secondary-background-color);
+    color: var(--primary-accent-color); /* Text is accent color to signify link */
+    border: 1px solid var(--border-light-color);
+}
+.btn-link .btn-icon {
+    fill: var(--primary-accent-color); /* Icon also accent color */
+}
+.btn-link:hover {
+    background-color: #E9E9EF;
+    border-color: #DCDCE0;
 }
 
 
 /* Semester Access */
 .semester-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-    gap: 20px; 
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+    gap: 16px; 
 }
-
-.semester-card { /* Card styling sudah ada di atas */
+.semester-card { 
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.3s ease; /* Hanya transisi shadow */
+    transition: box-shadow var(--transition-speed) ease;
 }
 .semester-card:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Shadow hover sedikit lebih jelas */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.1);
 }
-
 .semester-card h3 {
     color: var(--text-primary-color);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-weight: 600;
-    font-size: 1.1rem; 
-    border-bottom: none; /* Hapus border bawah */
-    padding-bottom: 0;
+    font-size: var(--font-size-card-title); 
 }
 .semester-status {
-    font-size: 0.8rem; 
+    font-size: var(--font-size-xs); 
     color: var(--text-tertiary-color);
+    opacity: 0.8;
     margin-bottom: 12px;
 }
 .update-date { 
     color: var(--text-secondary-color); 
     font-weight: 500;
 }
-
 .links {
     display: flex;
     flex-direction: column;
@@ -283,88 +282,47 @@ header .subtitle {
     margin-top: auto; 
 }
 
-
 /* Footer */
 footer {
-    background-color: var(--background-color); /* Footer dengan warna background utama */
+    background-color: var(--background-color);
     color: var(--text-tertiary-color);
+    opacity: 0.7;
     text-align: center;
-    padding: 1.5rem 0;
+    padding: 20px 0;
     margin-top: auto; 
-    border-top: 1px solid var(--border-color); /* Border halus di atas footer */
+    border-top: 1px solid var(--border-light-color);
 }
 footer p {
-    font-size: 0.85rem;
-    opacity: 1; /* Hapus opacity */
+    font-size: var(--font-size-xs);
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    body {
-        font-size: 14px; /* Base font lebih kecil di mobile */
+    :root { /* Adjust some base sizes for mobile */
+        --font-size-base: 14px;
+        --font-size-header: 18px;
+        --font-size-section-title: 17px;
+        --font-size-card-title: 16px;
     }
     .container {
-        width: 95%;
+        width: 90%; /* Give a bit more space from edges */
+        padding: 0 10px;
     }
     header {
-        padding: 1.2rem 0; 
+        padding: 15px 0; 
         margin-bottom: 20px;
-    }
-    header h1 {
-        font-size: 1.3rem; 
-    }
-    header .subtitle {
-        font-size: 0.85rem;
     }
     .card, .content-section {
-        padding: 20px; 
-        margin-bottom: 20px;
-    }
-    .section-title {
-        font-size: 1.15rem; 
+        padding: 15px; 
         margin-bottom: 15px;
     }
-    .info-block p, .support-section p {
-        font-size: 0.85rem;
+    .section-title {
+        margin-bottom: 12px;
     }
     .semester-grid {
         grid-template-columns: 1fr; 
     }
     .btn {
-        padding: 8px 16px; 
-        font-size: 0.8rem;
-    }
-    .copy-btn {
-        padding: 5px 8px;
-        font-size: 0.75rem;
-    }
-    .section-icon {
-        width: 16px;
-        height: 16px;
-    }
-}
-
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.2rem;
-    }
-    header .subtitle {
-        font-size: 0.8rem;
-    }
-    .card, .content-section {
-        padding: 15px;
-    }
-    .section-title {
-        font-size: 1.1rem; 
-    }
-    .info-block h3 {
-        font-size: 0.95rem;
-    }
-    .semester-card h3 {
-        font-size: 1rem;
-    }
-    .btn {
-        font-size: 0.75rem;
-        padding: 7px 14px;
+        padding: 7px 14px; 
     }
 }
